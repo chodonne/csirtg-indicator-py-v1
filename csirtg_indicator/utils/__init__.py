@@ -73,6 +73,8 @@ def resolve_itype(indicator, test_broken=False):
             return False
 
     def _fqdn(s):
+        if not s.isascii():
+            s = s.encode('idna').decode()
         if RE_FQDN.match(s):
             return True
 
@@ -203,7 +205,7 @@ def normalize_indicator(i, itype=None, lowercase=False, lowercase_explicit=False
 
 def is_subdomain(i):
     itype = resolve_itype(i)
-    if itype is not 'fqdn':
+    if itype != 'fqdn':
         return
 
     bits = i.split('.')

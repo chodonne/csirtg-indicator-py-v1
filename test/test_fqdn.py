@@ -17,6 +17,7 @@ GOOD = [
     'an0ther.exAmple.orG.',
     'under_score.com',
     '_dc-mx.test.someotherdom.com.',
+    'пример.ru',
 ]
 
 BAD = [
