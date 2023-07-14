@@ -44,7 +44,7 @@ def _i_to_zeek(i, cols):
     if (i['itype'] == 'md5') and ('ja3' in i['tags']):
         i['itype'] = 'ja3'
 
-    if i['itype'] is 'url':
+    if i['itype'] == 'url':
         i['indicator'] = re.sub(r'(https?\:\/\/)', '', i['indicator'])
 
     for c in cols:
@@ -66,7 +66,7 @@ def _i_to_zeek(i, cols):
             if isinstance(y, bytes):
                 y = y.encode('utf-8')
 
-        if c is 'itype':
+        if c == 'itype':
             y = 'Intel::{0}'.format(itype[i[c]])
 
         r.append(str(y))

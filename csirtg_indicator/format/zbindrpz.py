@@ -76,7 +76,7 @@ class BindRPZ(Plugin):
             if isinstance(i, Indicator):
                 i = i.__dict__()
 
-            if i.get('itype') is not 'fqdn':
+            if i.get('itype') != 'fqdn':
                 pass
 
             text.append('{}        CNAME .'.format(i['indicator'], self.output))
