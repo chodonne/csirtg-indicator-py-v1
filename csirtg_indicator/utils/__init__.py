@@ -189,15 +189,21 @@ def normalize_indicator(i, itype=None, lowercase=False, lowercase_explicit=False
         i = i.rstrip('.')
         # only don't lowercase if lowercase=False and lowercase_explicit=True (set by user)
         if lowercase or not lowercase_explicit:
+            if not i.isascii():
+                i = i.encode('idna').decode()
             i = i.lower()
     elif itype == 'url':
         u = urlparse(i)
         i = u.geturl().rstrip('/')
         if lowercase and lowercase_explicit:
+            if not i.isascii():
+                i = i.encode('idna').decode()
             i = i.lower()
         elif lowercase or not lowercase_explicit:
             scheme, netloc, path, qs, anchor = urlsplit(i)
             netloc = netloc.rstrip('.').lower()
+            if not netloc.isascii():
+                netloc = netloc.encode('idna').decode()
             i = urlunsplit((scheme, netloc, path, qs, anchor))
 
     return i

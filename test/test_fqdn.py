@@ -77,6 +77,8 @@ def test_fqdn_ok():
         e = Indicator(d)
         assert e.itype is 'fqdn'
         d = d.rstrip('.')
+        if not d.isascii():
+            d = d.encode('idna').decode()
         assert e.indicator == d.lower()
 
 def test_fqdn_not_ok():
